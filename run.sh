@@ -75,6 +75,16 @@ do
 done
 
 
+echo -e "${Green}::::::::::::::::::Installing Custom fonts:::::::::::::::::${Color_Off}"
+
+mkdir -p ~/.vim/custom_fonts/
+cd ~/.vim/custom_fonts/
+git clone https://github.com/powerline/fonts.git
+cd fonts
+./install.sh
+cd ..
+rm -rf fonts
+
 echo -e "${Green}::::::::::::::::Installing YCM dependecies:::::::::::::::::${Color_Off}"
 
 echo -e "${Purple}Completing installition for YCM  ${Color_Off}"
@@ -85,9 +95,9 @@ echo -e "${Blue}Installing --> clang  ${Color_Off}"
 cd ~
 mkdir clang
 cd clang
-wget http://llvm.org/releases/3.7.0/clang+llvm-3.8.0-x86_64-linux-gnu-ubuntu-14.04.tar.xz
-tar -xvf clang+llvm-3.8.0-x86_64-linux-gnu-ubuntu-14.04.tar.xz
-mv clang+llvm-3.8.0-x86_64-linux-gnu-ubuntu-14.04 clang_root_dir
+wget http://llvm.org/releases/4.0.0/clang+llvm-4.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz
+tar -xvf clang+llvm-4.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz
+mv clang+llvm-4.0.0-x86_64-linux-gnu-ubuntu-16.04 clang_root_dir
 
 cd ~
 mkdir ycm_build
