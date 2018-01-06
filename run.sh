@@ -49,6 +49,7 @@ dependecies=(
     "exuberant-ctags"
 )
 
+cp .vimrc ~/
 
 echo -e "${Green}::::::::::::::::::Installing Dependecies::::::::::::::::::${Color_Off}"
 
@@ -109,6 +110,8 @@ cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=~/clang/clang_root_dir . ~/.vim/bu
 cmake --build . --target ycm_core --config Release
 
 echo "export PATH=$HOME/clang/clang_root_dir/bin/:\$PATH" >> ~/.bashrc
+echo "~/.vim/bundle/gruvbox/gruvbox_256palette.sh" >> ~/.bashrc
+
 source ~/.bashrc
 
 vim -u NONE -c "helptags vim-fugitive/doc" -c q
