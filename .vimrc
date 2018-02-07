@@ -137,7 +137,10 @@ nmap <M-Left> :bprevious<CR>"
 
 nnoremap j gj
 nnoremap k gk
-
+ 
+"" Paste on  visual mode as ctrl-v
+vnoremap p "_dP
+"
 " Configure backspace so it acts as it should act                                                 
 " I really don't see any diference, shold test better
 set backspace=eol,start,indent
@@ -198,12 +201,10 @@ map <C-n> :NERDTreeToggle<CR>
 """""""""""""""""""""""""""""""""""""""
 
 " Change the current open buffer window
-map <Tab> <C-W>w
-
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+nmap <silent> <C-Up> :wincmd k<CR>
+nmap <silent> <C-Down> :wincmd j<CR>
+nmap <silent> <C-Left> :wincmd h<CR>
+nmap <silent> <C-Right> :wincmd l<CR>
 
 """""""""""""""""""""""""""""""""""""
 " File editor helper
