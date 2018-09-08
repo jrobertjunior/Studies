@@ -13,9 +13,14 @@ Purple='\033[0;35m'       # Purple
 Cyan='\033[0;36m'         # Cyan
 White='\033[0;37m'        # White'
 
+
+
 # The List of vim plugins to install
 declare -A plugins=(
     ["vim-surround"]="https://github.com/tpope/vim-surround.git"
+    ["multiple-cursors"]="https://github.com/terryma/vim-multiple-cursors.git"
+    ["eunuch"]="https://github.com/tpope/vim-eunuch.git"
+    ["EditorConfig"]="https://github.com/editorconfig/editorconfig-vim.git"
     ["supertab"]="https://github.com/ervandew/supertab.git"
     ["undutree"]="https://github.com/mbbill/undotree.git"
     ["tagbar"]="https://github.com/majutsushi/tagbar.git"
@@ -34,6 +39,7 @@ declare -A plugins=(
     ["fugitive"]="git://github.com/tpope/vim-fugitive.git"
     ["Misc"]="https://github.com/xolox/vim-misc"
     ["Easy-Tags"]="https://github.com/xolox/vim-easytags"
+    ["Ale"]="https://github.com/w0rp/ale.git"
     ["GrouvyBox"]="https://github.com/morhetz/gruvbox/"
     ["YCM"]="https://github.com/Valloric/YouCompleteMe.git"
 )
@@ -41,15 +47,28 @@ declare -A plugins=(
 # The list of dependecies to install
 dependecies=(
     "git"
-    "vim-gnome"
+    "neovim"
     "curl"
     "ack-grep"
     "build-essential cmake"
     "python-dev"
     "exuberant-ctags"
+    "python-dev"
+    "python-pip"
+    "python3-dev"
+    "python3-pip"
 )
 
 cp .vimrc ~/
+
+
+# for now I'll keep the vim and the neovim when avaliable
+
+echo -e "${Green}:::::::::::::Creating the symlinks to NeoVim::::::::::::::${Color_Off}"
+mkdir -p ~/.config/nvim
+ln -s ~/.config/nvim ~/.vim
+ln -s ~/.config/nvim/init.vim ~/.vimrc
+
 
 echo -e "${Green}::::::::::::::::::Installing Dependecies::::::::::::::::::${Color_Off}"
 
