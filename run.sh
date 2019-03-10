@@ -44,6 +44,12 @@ declare -A plugins=(
     ["YCM"]="https://github.com/Valloric/YouCompleteMe.git"
 )
 
+# Before anything let's install oracle java 10, what a pain...
+echo -e "${Green}:::::::::::::Installing Java::::::::::::::${Color_Off}"
+sudo add-apt-repository ppa:linuxuprising/java
+sudo apt-get update
+sudo apt-get install oracle-java10-installer
+
 # The list of dependecies to install
 dependecies=(
     "git"
@@ -115,9 +121,9 @@ echo -e "${Blue}Installing --> clang  ${Color_Off}"
 cd ~
 mkdir clang
 cd clang
-wget http://llvm.org/releases/4.0.0/clang+llvm-4.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz
-tar -xvf clang+llvm-4.0.0-x86_64-linux-gnu-ubuntu-16.04.tar.xz
-mv clang+llvm-4.0.0-x86_64-linux-gnu-ubuntu-16.04 clang_root_dir
+wget http://releases.llvm.org/7.0.1/clang%2bllvm-7.0.1-x86_64-linux-gnu-ubuntu-18.04.tar.xz
+tar -xvf clang%2bllvm-7.0.1-x86_64-linux-gnu-ubuntu-18.04.tar.xz
+mv clang%2bllvm-7.0.1-x86_64-linux-gnu-ubuntu-18.04 clang_root_dir
 
 cd ~
 mkdir ycm_build
