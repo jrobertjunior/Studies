@@ -48,11 +48,12 @@ declare -A plugins=(
 echo -e "${Green}:::::::::::::Installing Java::::::::::::::${Color_Off}"
 sudo add-apt-repository ppa:linuxuprising/java
 sudo apt-get update
-sudo apt-get install oracle-java10-installer
+sudo apt install oracle-java11-installer
 
 # The list of dependecies to install
 dependecies=(
     "git"
+    "git-gui"
     "neovim"
     "curl"
     "ack-grep"
@@ -72,8 +73,8 @@ cp .vimrc ~/
 
 echo -e "${Green}:::::::::::::Creating the symlinks to NeoVim::::::::::::::${Color_Off}"
 mkdir -p ~/.config/nvim
-ln -s ~/.config/nvim ~/.vim
-ln -s ~/.config/nvim/init.vim ~/.vimrc
+ln -s ~/.vim ~/.config/nvim 
+ln -s ~/.vimrc ~/.config/nvim/init.vim 
 
 
 echo -e "${Green}::::::::::::::::::Installing Dependecies::::::::::::::::::${Color_Off}"
