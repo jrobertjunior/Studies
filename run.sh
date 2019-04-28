@@ -72,7 +72,6 @@ cp .vimrc ~/
 # for now I'll keep the vim and the neovim when avaliable
 
 echo -e "${Green}:::::::::::::Creating the symlinks to NeoVim::::::::::::::${Color_Off}"
-mkdir -p ~/.config/nvim
 ln -s ~/.vim ~/.config/nvim 
 ln -s ~/.vimrc ~/.config/nvim/init.vim 
 
