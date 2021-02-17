@@ -44,17 +44,11 @@ declare -A plugins=(
     ["YCM"]="https://github.com/Valloric/YouCompleteMe.git"
 )
 
-# Before anything let's install oracle java 10, what a pain...
-echo -e "${Green}:::::::::::::Installing Java::::::::::::::${Color_Off}"
-sudo add-apt-repository ppa:linuxuprising/java
-sudo apt-get update
-sudo apt install oracle-java11-installer
 
 # The list of dependecies to install
 dependecies=(
     "git"
     "git-gui"
-    "neovim"
     "curl"
     "ack-grep"
     "build-essential cmake"
@@ -69,12 +63,8 @@ dependecies=(
 cp .vimrc ~/
 
 
-# for now I'll keep the vim and the neovim when avaliable
-
-echo -e "${Green}:::::::::::::Creating the symlinks to NeoVim::::::::::::::${Color_Off}"
-ln -s ~/.vim ~/.config/nvim 
-ln -s ~/.vimrc ~/.config/nvim/init.vim 
-
+PLUGIN_FOLDER=~/.vim/pack/plugs/
+mkdir -p ${PLUGIN_FOLDER}
 
 echo -e "${Green}::::::::::::::::::Installing Dependecies::::::::::::::::::${Color_Off}"
 
@@ -84,20 +74,15 @@ do
     sudo apt-get -y install $dep;
 done
 
-echo -e "${Green}:::::::::::::::::::Installing Phatogen:::::::::::::::::::${Color_Off}"
-
-mkdir -p ~/.vim/autoload ~/.vim/bundle && \
-curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
-
-cd ~/.vim/bundle
-
 
 echo -e "${Green}::::::::::::::::::Installing Vim Plugins::::::::::::::::::${Color_Off}"
 
 for plug in "${!plugins[@]}";
 do 
     echo -e "${Blue}Installing --> $plug ${Color_Off}"
-    git clone ${plugins["$plug"]}; 
+    git clone ${plugins["$plug"]} ${PLUGIN_FOLDER}$plug; 
+
+    vim -u NONE -c "helptags ${PLUGIN_FOLDER}$plug/doc" -c q
 done
 
 
@@ -121,9 +106,10 @@ echo -e "${Blue}Installing --> clang  ${Color_Off}"
 cd ~
 mkdir clang
 cd clang
-wget http://releases.llvm.org/7.0.1/clang%2bllvm-7.0.1-x86_64-linux-gnu-ubuntu-18.04.tar.xz
-tar -xvf clang%2bllvm-7.0.1-x86_64-linux-gnu-ubuntu-18.04.tar.xz
-mv clang%2bllvm-7.0.1-x86_64-linux-gnu-ubuntu-18.04 clang_root_dir
+# wget http://releases.llvm.org/7.0.1/clang%2bllvm-7.0.1-x86_64-linux-gnu-ubuntu-18.04.tar.xz
+wget https://github.com/llvm/llvm-project/releases/download/llvmorg-11.0.0/clang+llvm-11.0.0-x86_64-linux-gnu-ubuntu-20.04.tar.xz
+tar -xvf clang+llvm-11.0.0-x86_64-linux-gnu-ubuntu-20.04.tar.xz
+mv clang+llvm-11.0.0-x86_64-linux-gnu-ubuntu-20.04 clang_root_dir
 
 cd ~
 mkdir ycm_build
@@ -135,7 +121,7 @@ cmake -G "Unix Makefiles" -DPATH_TO_LLVM_ROOT=~/clang/clang_root_dir . ~/.vim/bu
 cmake --build . --target ycm_core --config Release
 
 echo "export PATH=$HOME/clang/clang_root_dir/bin/:\$PATH" >> ~/.bashrc
-echo "~/.vim/bundle/gruvbox/gruvbox_256palette.sh" >> ~/.bashrc
+echo "${PLUGIN_FOLDER}/GrouvyBox/gruvbox_256palette.sh" >> ~/.bashrc
 
 source ~/.bashrc
 
